@@ -6,22 +6,23 @@ class Helix_T:
         self.helix_id = helix_id
         self.apikey = apikey
         
-    def get_access_token(client_id, client_secret, scope):
-        url = 'https://iam.cloud.trellix.com/iam/v1.1/token'
+    def get_access_token(self, client_id, client_secret, scope):
+        url = 'https://auth.trellix.com/auth/realms/IAM/protocol/openid-connect/token'
+
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
+
         data = {
             'grant_type': 'client_credentials',
             'scope': scope
         }
+
         auth = (client_id, client_secret)
-        
-        response = requests.post(url, headers=headers, auth=auth, data=data)
         
         try:
             response = requests.post(url, headers=headers, auth=auth, data=data)
-            response.raise_for_status()  # Lança uma exceção para códigos de status HTTP não bem-sucedidos
+            response.raise_for_status()
             
             return response.json()['access_token']
         except requests.exceptions.HTTPError as http_err:
