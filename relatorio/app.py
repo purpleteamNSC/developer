@@ -59,7 +59,7 @@ def process_helix_configs(configs):
         helix_id = config.get('helix_id')
         api_key = config.get('api_key')
         if helix_id and api_key:
-            process_helix(company,helix_id, api_key)
+            process_helix(company, helix_id, api_key)
         else:
             logging.warning(f"{company} - Configuração inválida encontrada")
 
@@ -127,7 +127,6 @@ def process_helix(company, helix_id, api_key):
         else:
             logging.debug(f"Já existe o arquivo '{filename}' na pasta '{os.path.dirname(filename)}' com a query: {query}")
             
-    
     # Processando index
     def get_index(company,name, query):
         """
@@ -475,8 +474,6 @@ def origin_failure_login(company, name):
     logging.info(f'{name} - {query}')
     return query
 # END EXTRAS
-
-
 
 # Display do menu
 def display_menu():
