@@ -55,8 +55,49 @@ class Helix_T:
         
         return None
 
+    def get_index(self, query):
+        """
+        Executa a pesquisa no índice e salva os resultados.
+        
+        Args:
+            name (str): Nome da pesquisa.
+            query (str): Query da pesquisa.
+        """
+        try:
+            url = f"https://apps.fireeye.com/helix/id/{self.helix_id}/api/v1/search"
+            headers = {
+                "Content-Type": "application/json",
+                "x-trellix-api-token": f"Bearer {self.get_access_token()}",
+            }
+            payload = {"query": f"start='1 month ago' {query}"}
+            
+            response = requests.post(url, json=payload, headers=headers)
+            response.raise_for_status()
+
+            results = response.json().get('results', {}).get('aggregations', {}).items()
+            
+            data = None
+            for _, v in results:
+                if 'buckets' in v:
+                    data = v['buckets']
+
+            if data:
+                # save_index(company, name, query, data)
+                print(data)
+            else:
+                # logging.warning(f"{company} - Sem dados para a pesquisa '{name}'")
+                print('error ao salvar em data')
+        except requests.exceptions.RequestException as e:
+            # logging.warning(f"{company} - Erro na requisição ao endpoint '{name}': {e}")
+            print(e)
+        except Exception as e:
+            # logging.warning(f"{company} - Erro ao obter índice para a pesquisa '{name}': {e}")
+            print(e)
+
+
 class Helix_F:
     def __init__(self, organization, helix_id, apikey):
         self.organization = organization
         self.helix_id = helix_id
         self.apikey = apikey
+
