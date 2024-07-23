@@ -1,5 +1,6 @@
 .env
 .venv
+venv
 config.json
 __pycache__
 dados
