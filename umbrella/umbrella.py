@@ -90,6 +90,7 @@ def add_destination_to_list(token,ioc):
 
     
     if response.status_code == 200:
+        print(response.status_code)
         print("Adicionado na lista com sucesso")
         return response.json()
     else:
@@ -102,6 +103,8 @@ def add_destination_to_list(token,ioc):
 token = get_umbrella_token(key, secret)
 
 if token:
-    add_destination_to_list(token,'https://teste.com')
-
+    add_destination_to_list(token,'tinyurl.com')
+    add_destination_to_list(token,'www.tinyurl.com')
+    add_destination_to_list(token,'iti.itau')
+    add_destination_to_list(token,'20.212.168.117')
 
