@@ -1,8 +1,8 @@
 .env
 .venv
 venv
-config.json
+config*.json
 __pycache__
 dados
-log.log
+log*.log
 dev.py
