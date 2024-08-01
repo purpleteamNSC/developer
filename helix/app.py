@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from Helix import Helix_T
+from pprint import pprint
 
 load_dotenv()
 
@@ -12,11 +13,12 @@ scope = os.getenv('X_SCOPE')
 
 x = Helix_T(org, helix_id, client_id, secret, scope)
 
-# token = nsc.get_access_token()
-# print(token)
-# researches = nsc.get_index('class=analytics | groupby analytic')
-# for r in researches.get('results', []):
-#     print(f"{r['name']} - {r['query']}")
+results = x.get_search_saved().get('results',[])[0]
+# pprint(results)
 
-# x.get_index('class=analytics | groupby analytic')
-print(x.get_search_saved())
+name = results['name']
+query = results['query']
+
+print(name)
+print(query)
+
