@@ -93,11 +93,56 @@ class Helix_T:
         except Exception as e:
             # logging.warning(f"{company} - Erro ao obter índice para a pesquisa '{name}': {e}")
             print(e)
+        
+        return None
 
 
 class Helix_F:
     def __init__(self, organization, helix_id, apikey):
+        self.base_url = 'https://apps.fireeye.com'
         self.organization = organization
         self.helix_id = helix_id
         self.apikey = apikey
 
+    def get_search_saved(self):
+        """
+        Busca todas as pesquisas salvas na API para um helix_id específico.
+        """
+        try:
+            url = f"{self.base_url}/helix/id/{self.helix_id}/api/v3/search/saved/?limit=50"
+            headers = {
+                "x-fireeye-api-key": self.apikey,
+                "accept": "application/json"
+            }
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.HTTPError as http_err:
+            print(f"HTTP error occurred: {http_err}")
+        except Exception as err:
+            print(f"Other error occurred: {err}")
+        
+        return None
+    
+
+    def get_archive_id(self):
+        """
+        Busca pesquisa feita no archive por id.
+        """
+        try:
+            url = f"{self.base_url}/helix/id/{self.helix_id}/api/v3/search/saved/?limit=50"
+            headers = {
+                "x-fireeye-api-key": self.apikey,
+                "accept": "application/json"
+            }
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.HTTPError as http_err:
+            print(f"HTTP error occurred: {http_err}")
+        except Exception as err:
+            print(f"Other error occurred: {err}")
+        
+        return None
+    
+    
