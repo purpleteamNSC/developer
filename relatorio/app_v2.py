@@ -465,7 +465,7 @@ def failure_Login04(company, name):
     # query = f'metaclass=windows targetusername={user} eventid=4625 | groupby srcipv4'
     query = f'metaclass=windows targetusername:[`*{user}`] eventid=4625 | groupby srcipv4'
     
-    logging.info(f'{company} - {name} - {query}')
+    # logging.info(f'{company} - {name} - {query}')
     return query
 
 
@@ -484,7 +484,7 @@ def failure_Login05(company, name):
 
     query = f'metaclass=windows targetusername:[`*{user}`] eventid=4625 | groupby meta_sip4'
     
-    logging.info(f'{company} - {name} - {query}')
+    # logging.info(f'{company} - {name} - {query}')
     return query
 # END EXTRAS
 
