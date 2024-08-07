@@ -30,15 +30,11 @@ Developer tools orchestrator
  
 <h3>Cloning</h3>
 
-How to clone your project
-
 ```bash
 git clone https://github.com/purpleteamNSC/developer.git
 ```
  
 <h3>Starting</h3>
-
-How to start your project
 
 ```bash
 cd source-name
