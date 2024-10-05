@@ -429,7 +429,7 @@ def get_date_range(query):
     
     if c_day > 1 and c_day < 15:
         search_start_date = f'{c_year}-{c_month-1}-01T00:00:00Z'
-        search_end_date = f'{c_year}-{c_month-1}-31T23:59:59Z'
+        search_end_date = f'{c_year}-{c_month-1}-30T23:59:59Z'
     else:
         search_start_date = f'{c_year}-{c_month}-01T00:00:00Z'
         search_end_date = f'{c_year}-{c_month}-{c_day}T{c_hour-4}:59:59Z'  
@@ -457,8 +457,9 @@ def failure_Login04(company, name):
     pt = openpyxl.load_workbook(filename)
     pl = pt.active
     user = pl['A2'].value
+    user = user.lstrip("0")
 
-    query = f'metaclass=windows has=srcipv4 NOT targetusername:["*$"] targetusername:[`*{user}`] eventid=4625 | groupby srcipv4'
+    query = f'metaclass=windows has=srcipv4 NOT targetusername:["*$"] targetusername:[`{user}`] eventid=4625 | groupby srcipv4'
     
     return query
 
@@ -475,8 +476,9 @@ def failure_Login05(company, name):
     pt = openpyxl.load_workbook(filename)
     pl = pt.active
     user = pl['A2'].value
+    user = user.lstrip("0")
 
-    query = f'metaclass=windows targetusername:[`*{user}`] eventid=4625 | groupby meta_sip4'
+    query = f'metaclass=windows targetusername:[`{user}`] eventid=4625 | groupby meta_sip4'
     
     return query
 # END EXTRAS
@@ -499,7 +501,7 @@ def main():
     Função principal que carrega configurações e processa cada par de helix_id e api_key.
     """
     setup_logging()
-    config_file = 'config_dev.json'
+    config_file = 'config.json'
     
     while True:
         os.system('clear')
