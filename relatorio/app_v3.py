@@ -501,7 +501,7 @@ def main():
     Função principal que carrega configurações e processa cada par de helix_id e api_key.
     """
     setup_logging()
-    config_file = 'config_dev.json'
+    config_file = 'config.json'
     
     while True:
         os.system('clear')
